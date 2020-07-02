@@ -1,0 +1,30 @@
+
+**Open this with note pad** 
+ _________	 			 __________
+|   Name  | Character name		|  Player  | Player
+ ---------	 			 ----------
+| N° conv | Number of conversation	|  OpGroup | 
+|  Node   | Number of node		|   Op     | Id espesific in the group of options
+| OpGroup | Number of the gruop options	| LinkNode | Number node of next character dialogue
+|   Text  | Sumary of the text		|   Text   | Option's text
+ ---------	 			 ----------
+
+csv line example:
+	
+	Ghost.csv > 01;12;11;How are you?
+		
+		Ghost.csv =	Character's name and the file (Except Player.csv)
+		01 	= 	Second conversation
+		12 	= 	We are in this specific node
+		11 	= 	Options group to show after the character finished talking
+		How are you? =	Text showing by the character
+	
+	Player.csv > 01;01;13;I'm fine.
+		
+		Player.csv =	All options selectable by the player (mabye i will change this in the future)
+		01 	=	Second conversation
+		01	=	Identifier of espesific option in the group
+		13	=	Next node after select the option
+		I'm fine. =	Text shoing in the option
+
+badluckgames0@gmail.com

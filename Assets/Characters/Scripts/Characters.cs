@@ -1,0 +1,53 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class Characters : MonoBehaviour{
+    
+    public Dialogue DiaChar; //Crate new objet "Dialogue"
+    // Start is called before the first frame update
+    void Start(){
+
+        Dialogue("Ghost", "00", "00"); //Start the game with first dialogue
+    }
+
+    // Update is called once per frame
+    void Update(){
+        
+    }
+
+
+    public void Dialogue(string name, string scene, string node){
+
+        List<string> diaList = new List<string>(); //List where keep lines clear csv files
+        string[] allDialogue = File.ReadAllLines("./Assets/Characters/Dialogues/"+name+".csv"); //Read and save csv file
+        string[] dialogue; //Keep text to show in dialogue of character
+        string opGroup = null; //Id group options
+
+        foreach (var list in allDialogue){ //Line by line is save in list "diaList"
+
+            var text = list.Split(';');
+            if (text[0] == scene && text[1] == node){ //Chek if the lines are correspondent to the actual dialogue
+                
+                diaList.Add(text[3]); //Add the text content to diaList (text to show in the dialogue)
+                if (text[2] != "XX"){
+
+                    opGroup = text[2];
+                }
+
+
+
+            }else if(diaList.Count != 0){ //If the list have an atrivute and don't found line
+            
+                break; //break the foreach
+            }
+        }
+
+        dialogue = diaList.ToArray(); //Change the list to array
+        DiaChar.name=name; //Set name to object DiaCharacter
+        DiaChar.sentences = dialogue; //Set array whit the dialogues to DiaCharacter
+        FindObjectOfType<DialogueManager>().StartDialogue(DiaChar, opGroup); //Call method StartDialogue() of DialogueManeger.cs
+
+    }
+}
