@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000017166, y: 59}
-  m_SizeDelta: {x: 160, y: 28.4}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6225599103048641682
 CanvasRenderer:
@@ -221,6 +221,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 3308067111626653149}
   TextToShow: 
+  Conversation: 
   NextNode: 
-  dialogue: {fileID: 0}
-  character: {fileID: 0}
+  CharRep: 
+  Dialogue: {fileID: 0}
+  Character: {fileID: 0}
+  Options: {fileID: 0}

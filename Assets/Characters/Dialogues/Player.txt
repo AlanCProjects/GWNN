@@ -1,0 +1,7 @@
+OpGroup;Conv;LinkNode;ChRep;Text (more info in "./game code.txt")
+00;00;01;Ghost;¿¡Qué!?
+00;00;02;Ghost;Me parece perfecto
+00;00;03;Ghost;...
+01;00;04;Ghost;Ahora estoy más calmado (sarcasmo)
+01;00;05;Ghost;Oh, tiene sentido
+01;00;06;Ghost;Pero yo no quiero morir

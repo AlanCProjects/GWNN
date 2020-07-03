@@ -39,7 +39,6 @@ public class DialogueManager : MonoBehaviour{
         NextSentence = true;
         animator.SetBool(IsOpenID, true); //activa la animacion de entrada de la TextBox
         NameText.text = dialogue.name;  //Aquí va el nombre del personaje que habla que esté en el script "dialogue"
-        Debug.Log("Start conversation with "+ dialogue.name);
         sentences.Clear(); //Limpia la variable sentences por si antes tenía algo
 
         foreach (string sentence in dialogue.sentences){ //Cada elemento que hay almacenado en "sentences" del script dialogue

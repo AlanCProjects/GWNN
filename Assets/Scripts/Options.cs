@@ -10,7 +10,7 @@ public class Options : MonoBehaviour{
 
     public string NumOption; //Number to identify button
     public GameObject BtnOptionPrefab; //Prefab of button options
-    private Dictionary<int, int[]> positions = new Dictionary<int, int[]>();
+    private Dictionary<float, float[]> positions = new Dictionary<float, float[]>();
     private List<string> optionInfo = new List<string>(); //List with text to be displayed in the button
     private List<string> Node = new List<string>(); //List with the nodes correspondig a cada button
     private List<string> Conversation = new List<string>(); //Conversation corresponding
@@ -18,15 +18,15 @@ public class Options : MonoBehaviour{
 
 
     public void Option(string opGroup){ 
-        string[] allOptions = File.ReadAllLines("./Assets/Characters/Dialogues/Player.csv"); //Read and open file "Player.scv"
+        string[] allOptions = File.ReadAllLines("./Assets/Characters/Dialogues/Player.txt"); //Read and open file "Player.scv"
         int meter = 0;
     
         foreach (var list in allOptions){
             //Clear elemnets of allOptions variable and split elementes
             var text = list.Split(';');
-
+            
             if (text[0] == opGroup){
-
+                
                 ++ meter;
                 Conversation.Add(text[1]);
                 Node.Add(text[2]);
@@ -40,31 +40,31 @@ public class Options : MonoBehaviour{
             
             case 1:
 
-                positions.Add(0, new int[]{290, 190}); //add coordenates button
+                positions.Add(0, new float[]{290.0f, 190.0f}); //add coordenates button
                 ButtonCreator(0);
                 break;
             
             case 2:
 
-                positions.Add(0, new int[]{290, 209});
-                positions.Add(1, new int[]{290, 168});
+                positions.Add(0, new float[]{290.0f, 209.0f});
+                positions.Add(1, new float[]{2900.0f, 1680.0f});
                 ButtonCreator(1);
                 break;
             
             case 3:
 
-                positions.Add(0, new int[]{290, 230});
-                positions.Add(1, new int[]{290, 198});
-                positions.Add(2, new int[]{290, 165});
+                positions.Add(0, new float[]{290.0f, 230.0f});
+                positions.Add(1, new float[]{290.0f, 198.0f});
+                positions.Add(2, new float[]{290.0f, 165.0f});
                 ButtonCreator(2);
                 break;
 
             case 4:
 
-                positions.Add(0, new int[]{290, 241});
-                positions.Add(1, new int[]{290, 209});
-                positions.Add(2, new int[]{290, 176});
-                positions.Add(3, new int[]{290, 144});
+                positions.Add(0, new float[]{290.0f, 241.0f});
+                positions.Add(1, new float[]{290.0f, 209.0f});
+                positions.Add(2, new float[]{290.0f, 176.0f});
+                positions.Add(3, new float[]{290.0f, 144.0f});
                 ButtonCreator(3);
                 break;
         }
@@ -78,7 +78,7 @@ public class Options : MonoBehaviour{
 
         for(int i = 0; i <= repeat; ++i){
 
-            NewBtn = Instantiate(BtnOptionPrefab, new Vector3(positions[i][0],positions[i][1],0),
+            NewBtn = Instantiate(BtnOptionPrefab, new Vector3(290.0f,positions[i][1],0),
             Quaternion.identity); //Instantatie a prefabs BtnOptionPrefab
             NewBtn.transform.parent = transform; //To do the prefab be child of GameObject Options
             BtnControl= NewBtn.GetComponent<BtnController>();
@@ -89,6 +89,10 @@ public class Options : MonoBehaviour{
         }
 
         positions.Clear();
+        Conversation.Clear();
+        Node.Clear();
+        ChRep.Clear();
+        optionInfo.Clear();
 
     }
 

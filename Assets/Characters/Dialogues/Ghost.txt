@@ -1,0 +1,10 @@
+N°Conv;Node;OpGroup;text (more info in "./game code.txt")
+00;00;XX;¡Felicidades! ¡Por fin te has muerto!
+00;00;00;Me llamo Ghost y soy el encarcado de que tu transicion del más acá hacia el más allá sea... más amigable. Jeje
+00;01;XX;Que has muerto.
+00;01;01;Por alguna razón tu corazón dejó de latir y tu cerebro de recibir oxígeno
+00;01;01;en tu cerebro las neuronas hicieron una fiesta antes de morir lo que llevó a que experimetnes ciertas cosas
+00;01;01;la última parte en morir fue la que almacena tus recuerdos
+00;01;01;así que probablemente hayas visto una linda pelicuala de como fue tu vida
+00;01;01;finalmente las últimas neuronas te envíaron una señal que posiblemente hayas interpretado como una luz blanca
+00;01;01;y eso nos llevó aquí, tu y yo hablando.

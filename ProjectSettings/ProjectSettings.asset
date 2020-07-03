@@ -613,10 +613,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 33ea2352-aacc-4642-b517-3e25de5b17a9
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: GWNN
+  organizationId: alancg
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
