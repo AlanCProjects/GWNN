@@ -31,7 +31,7 @@ public class BtnController : MonoBehaviour
         foreach(Transform child in Options.transform){
 
             //Kill all Option's child front her >:D
-            Destroy(child.gameObject);
+            child.gameObject.SetActive(false);
         }
         
     }

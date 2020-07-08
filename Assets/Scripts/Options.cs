@@ -5,20 +5,50 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[System.Serializable]
 public class Options : MonoBehaviour{
+    
+    [System.Serializable]
 
+    public class Pool{
+        public string Tag;
+        public GameObject Prefab;
+        public int Size;
+    }
+
+    #region Varialbes
     public string NumOption; //Number to identify button
     public GameObject BtnOptionPrefab; //Prefab of button options
-    private Dictionary<float, float[]> positions = new Dictionary<float, float[]>();
+    private Dictionary<float, float[]> positions = new Dictionary<float, float[]>(); //positions to set the buttons
     private List<string> optionInfo = new List<string>(); //List with text to be displayed in the button
     private List<string> Node = new List<string>(); //List with the nodes correspondig a cada button
     private List<string> Conversation = new List<string>(); //Conversation corresponding
     private List<string> ChRep = new List<string>(); //Character's name to reply
+    public List <Pool> pools; //Pool's list
+    public Dictionary<string, Queue<GameObject>> poolDictionary; //Save the pool's objects
+    #endregion
 
+    void Start(){
+
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+        foreach (Pool pool in pools){
+            Queue<GameObject> objctPool = new Queue<GameObject>();
+
+
+            for (int i = 0; i < pool.Size; i++){
+                
+                GameObject obj = Instantiate(pool.Prefab);
+                obj.transform.SetParent(transform, false);
+                obj.SetActive(false);
+                objctPool.Enqueue(obj);
+
+            }
+            poolDictionary.Add(pool.Tag, objctPool);
+        }
+    }
 
     public void Option(string opGroup){ 
-        string[] allOptions = File.ReadAllLines("./Assets/Characters/Dialogues/Player.txt"); //Read and open file "Player.scv"
+        string[] allOptions = File.ReadAllLines("./Assets/Characters/Dialogues/Player.csv"); //Read and open file "Player.scv"
         int meter = 0;
     
         foreach (var list in allOptions){
@@ -41,14 +71,14 @@ public class Options : MonoBehaviour{
             case 1:
 
                 positions.Add(0, new float[]{290.0f, 190.0f}); //add coordenates button
-                ButtonCreator(0);
+                BtnSpawnFromPool(0, "Button");
                 break;
             
             case 2:
 
                 positions.Add(0, new float[]{290.0f, 209.0f});
                 positions.Add(1, new float[]{2900.0f, 1680.0f});
-                ButtonCreator(1);
+                BtnSpawnFromPool(1, "Button");
                 break;
             
             case 3:
@@ -56,7 +86,7 @@ public class Options : MonoBehaviour{
                 positions.Add(0, new float[]{290.0f, 230.0f});
                 positions.Add(1, new float[]{290.0f, 198.0f});
                 positions.Add(2, new float[]{290.0f, 165.0f});
-                ButtonCreator(2);
+                BtnSpawnFromPool(2, "Button");
                 break;
 
             case 4:
@@ -65,35 +95,42 @@ public class Options : MonoBehaviour{
                 positions.Add(1, new float[]{290.0f, 209.0f});
                 positions.Add(2, new float[]{290.0f, 176.0f});
                 positions.Add(3, new float[]{290.0f, 144.0f});
-                ButtonCreator(3);
+                BtnSpawnFromPool(3, "Button");
                 break;
         }
 
 
     }
 
-    public void ButtonCreator(int repeat){
-        GameObject NewBtn; // GameObject to keep the prefab of GameObject BtnOption
-        BtnController BtnControl; //Script BtnControl
 
-        for(int i = 0; i <= repeat; ++i){
+    public void BtnSpawnFromPool(int repeat, string tag){
+        GameObject ObjToSpawn;
+        BtnController btnControl;
 
-            NewBtn = Instantiate(BtnOptionPrefab, new Vector3(290.0f,positions[i][1],0),
-            Quaternion.identity); //Instantatie a prefabs BtnOptionPrefab
-            NewBtn.transform.parent = transform; //To do the prefab be child of GameObject Options
-            BtnControl= NewBtn.GetComponent<BtnController>();
-            BtnControl.TextToShow = optionInfo[i]; //Set text to the variable TextToShow of BtnController (script)
-            BtnControl.CharRep = ChRep[i]; //Send character's name to reply to script BtnController
-            BtnControl.Conversation = Conversation[i]; //Send de number conversation  to script BtnController
-            BtnControl.NextNode = Node[i]; //Send the node of conversation to script BtnController
+        if(!poolDictionary.ContainsKey(tag)){
+            Debug.LogWarning("Pool whit tag"+tag+"doesn't exist ");
+            return;
         }
 
+        for (int i = 0; i <= repeat; i++){
+
+            ObjToSpawn =  poolDictionary[tag].Dequeue(); //Get a object of the pool
+            ObjToSpawn.SetActive(true); //Active the object 
+            ObjToSpawn.transform.position = new Vector2(290.0f, positions[i][1]); //Set a position
+            btnControl = ObjToSpawn.GetComponent<BtnController>(); //I don't know what i do here
+            btnControl.TextToShow = optionInfo[i]; //Set text to the variable TextToShow of BtnController (script)
+            btnControl.CharRep = ChRep[i]; //Send character's name to reply to script BtnController
+            btnControl.Conversation = Conversation[i]; //Send de number conversation  to script BtnController
+            btnControl.NextNode = Node[i]; //Send the node of conversation to script BtnController
+            poolDictionary[tag].Enqueue(ObjToSpawn); //give back the object to the pool
+        }
+        #region ClearLists
         positions.Clear();
         Conversation.Clear();
         Node.Clear();
         ChRep.Clear();
         optionInfo.Clear();
-
+        #endregion
     }
 
   

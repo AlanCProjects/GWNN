@@ -52,8 +52,6 @@
      <Compile Include="Assets\Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\GeneralController.cs" />
      <Compile Include="Assets\Scripts\Options.cs" />
-     <None Include="Assets\Characters\Dialogues\Ghost.txt" />
-     <None Include="Assets\Characters\Dialogues\Player.txt" />
      <None Include="Assets\Characters\Dialogues\code game.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Alan/Documents/Game Proyect/GWNN/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

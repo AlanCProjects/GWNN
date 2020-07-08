@@ -6,8 +6,8 @@ using UnityEngine;
 public class Characters : MonoBehaviour{
     
     public Dialogue DiaChar; //Crate new objet "Dialogue"
-    private int AppearID = Animator.StringToHash("appear");
-    private int VisibleID = Animator.StringToHash("visible");
+    private int AppearID = Animator.StringToHash("appear"); //ID of animation "appear"
+    private int VisibleID = Animator.StringToHash("visible"); //ID of animation "visible"
     // Start is called before the first frame update
     void Start(){
 
@@ -21,11 +21,11 @@ public class Characters : MonoBehaviour{
 
     IEnumerator StartGame(){
 
-        gameObject.GetComponent<Animator>().SetBool(VisibleID, false);
-        yield return new WaitForSeconds(3);
-        gameObject.GetComponent<Animator>().SetBool(AppearID, true);
-        gameObject.GetComponent<Animator>().SetBool(VisibleID, true);
-        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<Animator>().SetBool(VisibleID, false); //Change opacity 100% to 0% (in a frame)
+        yield return new WaitForSeconds(3); //wait 3 seconds
+        gameObject.GetComponent<Animator>().SetBool(AppearID, true); //Animation with transiton to opacity 0% to 100%
+        gameObject.GetComponent<Animator>().SetBool(VisibleID, true); //Go to idle state 
+        yield return new WaitForSeconds(2); //Wait 2 seconds
         Dialogue("Ghost", "00", "00"); //Start the game with first dialogue
 
 
@@ -33,7 +33,7 @@ public class Characters : MonoBehaviour{
     public void Dialogue(string name, string scene, string node){
 
         List<string> diaList = new List<string>(); //List where keep lines clear csv files
-        string[] allDialogue = File.ReadAllLines("./Assets/Characters/Dialogues/"+name+".txt"); //Read and save csv file
+        string[] allDialogue = File.ReadAllLines("./Assets/Characters/Dialogues/"+name+".csv"); //Read and save csv file
         string[] dialogue; //Keep text to show in dialogue of character
         string opGroup = null; //Id group options
 

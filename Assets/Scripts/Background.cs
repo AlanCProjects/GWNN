@@ -14,7 +14,7 @@ public class Background : MonoBehaviour
     }
 
     IEnumerator AnimStart(){
-
+        // Start game with an animaton
         gameObject.GetComponent<Animator>().SetBool(StartGameID, true);
         yield return new WaitForSeconds(2);
         gameObject.GetComponent<Animator>().SetBool(StartGameID, false);
